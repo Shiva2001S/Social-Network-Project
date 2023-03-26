@@ -7,14 +7,17 @@ import matplotlib.pyplot as plt
 G = nx.Graph()
 mydict, vis = {}, {}
 # Open the CSV file for reading
-with open('res.csv', 'r') as file:
-    reader = csv.reader(file)
+with open('res2.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    with open('res.csv', 'r') as file:
+        reader = csv.reader(file)
 
-    # Loop over each row in the CSV file
-    for row in reader:
-        # Do something with the row
-        if int(row[1]) > 3:
-            mydict[int(row[0])] = True
+        # Loop over each row in the CSV file
+        for row in reader:
+            # Do something with the row
+            if int(row[1]) > 3:
+                mydict[int(row[0])] = True
+                writer.writerow(row[0])
 
 with open('my2.csv', 'r') as file:
     reader = csv.reader(file)
@@ -35,3 +38,4 @@ nx.draw_networkx_labels(G, pos)
 nx.draw_networkx_edges(G, pos, edge_color=edge_colors, width=2)
 plt.axis('off')
 plt.show()
+plt.savefig('output-1.png')
